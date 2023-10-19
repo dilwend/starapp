@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Store Total Sales by Month</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <style type="text/css">
+      #us {
+        float: right;
+        margin-right: 20px;
+        margin-top: 10px;
+      }
+      #us h3 {
+        margin: 0;
+      }
+      .ps {
+        width: 60%;
+        margin-top: 20px;
+        margin-left: 20%;
+      }
+      #signout a {
+        padding: 2px 0 2px 20px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #000;
+      }
+      th, td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      th {
+        background-color: #337ab7;
+        color: #fff;
+      }
+      #gfg {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+      }
+      h1 {
+        color: #337ab7;
+      }
+      h3.flashes {
+        text-align: center;
+        color: #337ab7;
+      }
+      .nav-tabs li {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="us">
+      <ul class="nav nav-pills">
+        <li><h3> {{session['current_user']}} &nbsp</h3></li>
+        <li role="presentation" class="active" id="signout"><a href="/logout" style="color: #fff;">Sign Out</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul class="nav nav-tabs">
+        <li role="presentation"><a href="pos" style="color: #337ab7;">POS</a></li>
+        <li role="presentation"><a href="/product" style="color: #337ab7;">Product</a></li>
+        <li role="presentation"><a href="/date" style="color: #337ab7;">Date</a></li>
+        <li role="presentation"><a href="/store" style="color: #337ab7;">Store</a></li>
+        <li role="presentation"><a href="/statistics" class="active" style="color: #fff; background-color: #337ab7;">Statistics</a></li>
+        <li role="presentation"><a href="/about_user" style="color: #337ab7;">About</a></li>
+      </ul>
+    </div>
+    <h1>Store Total Sales by Month</h1>
+    <b>Search the table for Type: 
+      <input id="gfg" type="text" placeholder="Search here">
+    </b>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <h3 class="flashes" align="center">{{ message }}</h3>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div class="ps">
+      <table>
+        <thead>
+          <tr>
+            <th>Store Name</th>
+            <th>Month</th>
+            <th>Total Quantity</th>
+            <th>Total Sales</th>
+            <th>Total Gross Profit</th>
+          </tr>
+        </thead>
+        {% for i in store_month %}
+          <tbody id="store">
+            <tr>
+              <td>{{i.store_name}}</td>
+              <td>{{i.calendar_month}}</td>
+              <td>{{i.total_quantity}}</td>
+              <td>{{i.total_sales}}</td>
+              <td>{{i.total_gross_profit}}</td>
+            </tr>
+          </tbody>
+        {% endfor %}
+      </table>
+    </div>
+    <script>
+      $(document).ready(function() {
+        $("#gfg").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#store tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>POS Transaction Sales</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <style type="text/css">
+        #us {
+            float: right;
+            margin-right: 20px;
+            margin-top: 10px;
+        }
+
+        #us h3 {
+            margin: 0;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .ps {
+            width: 60%;
+            margin-top: 20px;
+            margin-left: 20%;
+        }
+
+        #icon {
+            float: right;
+            margin-top: -15px;
+        }
+
+        #signout {
+            width: 100px;
+            height: 20px;
+        }
+
+        #signout a {
+            padding: 2px 0 2px 20px;
+        }
+
+        table, th, td, tr, tbody {
+            border: 1px solid black;
+        }
+
+        .nav-tabs li {
+            margin-right: 10px;
+        }
+
+        h3 a {
+            color: #337ab7;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+
+        h3 a:hover {
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            color: #337ab7;
+        }
+    </style>
+</head>
+<body>
+<div id="us">
+    <ul class="nav nav-pills">
+        <li><h3> {{session['current_user']}} &nbsp</h3></li>
+        <li role="presentation" class="active" id="signout"><a href="/logout" style="color: #fff;">Sign Out</a></li>
+    </ul>
+</div>
+<div>
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="pos" style="color: #337ab7;">POS</a></li>
+        <li role="presentation"><a href="/product" style="color: #337ab7;">Product</a></li>
+        <li role="presentation"><a href="/date" style="color: #337ab7;">Date</a></li>
+        <li role="presentation"><a href="/store" style="color: #337ab7;">Store</a></li>
+        <li role="presentation"><a href="" class="active" style="color: #fff; background-color: #337ab7;">Statistics</a></li>
+        <li role="presentation"><a href="/about_user" style="color: #337ab7;">About</a></li>
+    </ul>
+</div>
+<h1>Statistics</h1>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<h3 class="flashes" align="center" style="color:#337ab7">{{ message }}</h3>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="ps">
+    <h3><a href="/store_sales">Store Total Sales</a></h3>
+    <p>View the total sales for each store.</p>
+</div>
+<div class="ps">
+    <h3><a href="/product_sales">Product Total Sales</a></h3>
+    <p>View the total sales for each product.</p>
+</div>
+<div class="ps">
+    <h3><a href="/statisticsday">Day Total Sales with Product and Store</a></h3>
+    <p>View the total sales for each day with product and store details.</p>
+</div>
+<div class="ps">
+    <h3><a href="/statisticsmonth">Month Total Sales with Product and Store</a></h3>
+    <p>View the total sales for each month with product and store details.</p>
+</div>
+<div class="ps">
+    <h3><a href="/store_day">Day Total Sales with Store</a></h3>
+    <p>View the total sales for each day with store details.</p>
+</div>
+<div class="ps">
+    <h3><a href="/store_month">Month Total Sales with Store</a></h3>
+    <p>View the total sales for each month with store details.</p>
+</div>
+<div class="ps">
+    <h3><a href="/product_day">Day Total Sales with Product</a></h3>
+    <p>View the total sales for each day with product details.</p>
+</div>
+<div class="ps">
+    <h3><a href="/product_month">Month Total Sales with Product</a></h3>
+    <p>View the total sales for each month with product details.</p>
+</div>
+</body>
+</html>
